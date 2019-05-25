@@ -11,6 +11,7 @@
     "eslint-config-google": "^0.13.0"
   },
   "dependencies": {
+    "bignumber.js": "^8.1.1",
     "libp2p": "^0.25.3"
   }
 }

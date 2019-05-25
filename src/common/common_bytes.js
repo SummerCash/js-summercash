@@ -5,7 +5,7 @@
  * @param {any} b
  * @return {any} Concatenated array.
  */
-function concatTypedArrays(a, b) {
+function concatArrays(a, b) {
   const c = new a.constructor(a.length + b.length); // Initialize
 
   c.set(a, 0); // Set first half
@@ -14,4 +14,6 @@ function concatTypedArrays(a, b) {
   return c; // Return concatenated
 }
 
-module.exports = [concatTypedArrays]; // Exports
+module.exports = {
+  concatArrays: concatArrays,
+}; // Exports

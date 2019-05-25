@@ -1,0 +1,9 @@
+{
+  "name": "js-summercash",
+  "version": "0.1.0",
+  "description": "A minimal nodejs SummerCash client.",
+  "main": "src/index.js",
+  "repository": "https://github.com/SummerCash/js-summercash.git",
+  "author": "Dowland Aiello <mitsukomegumii@gmail.com>",
+  "license": "Apache 2.0"
+}

@@ -38,4 +38,6 @@ class Transaction {
   }
 }
 
-module.exports = Transaction; // Export transaction class
+module.exports = {
+  Transaction: Transaction,
+}; // Export transaction class

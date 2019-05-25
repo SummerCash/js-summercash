@@ -6,6 +6,9 @@
   "repository": "https://github.com/SummerCash/js-summercash.git",
   "author": "Dowland Aiello <mitsukomegumii@gmail.com>",
   "license": "Apache-2.0",
+  "scripst": {
+    "test": "mocha"
+  },
   "devDependencies": {
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^4.3.0",

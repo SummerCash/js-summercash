@@ -12,7 +12,14 @@ class Address {
    * @param {Uint8Array} address
    */
   constructor(address) {
-    this.address = address; // Set address
+    let bodyAddress = address; // Set address
+
+    if (!new TextDecoder('utf-8').decode(address).includes('0x')) {
+      // Check no 0x
+      bodyAddress = util.concatArrays(zeroX, hash); // Set hash with 0x
+    }
+
+    this.address = bodyAddress; // Set address
   }
 }
 
@@ -29,9 +36,9 @@ class Hash {
   constructor(hash) {
     let bodyHash = hash; // Set hash
 
-    if (!new TextDecoder('utf-8').decode(uint8array).includes('0x')) {
+    if (!new TextDecoder('utf-8').decode(hash).includes('0x')) {
       // Check no 0x
-      bodyHash = util.concatArrays(new TextEncoder('utf-8').encode('0x'), hash); // Set hash with 0x
+      bodyHash = util.concatArrays(zeroX, hash); // Set hash with 0x
     }
 
     this.hash = bodyHash; // Set hash
@@ -46,7 +53,7 @@ class Hash {
     const hashBody = Buffer.from(s.slice(2, s.length)); // Decode hash body
     const hash = util.concatArrays(zeroX, hashBody); // Concatenate hash parts
 
-    return this(hash); // Decode
+    return new this(hash); // Decode
   }
 
   /**

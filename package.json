@@ -6,7 +6,7 @@
   "repository": "https://github.com/SummerCash/js-summercash.git",
   "author": "Dowland Aiello <mitsukomegumii@gmail.com>",
   "license": "Apache-2.0",
-  "scripst": {
+  "scripts": {
     "test": "mocha"
   },
   "devDependencies": {

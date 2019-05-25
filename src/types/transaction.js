@@ -23,7 +23,7 @@ class Transaction {
     this.amount = amount; // Set amount
     this.payload = payload; // Set payload
     this.timestamp = Date.UTC(); // Set timestamp
-    this.hash = sha3(this); // Set hash
+    this.hash = sha3(this.bytes()); // Set hash
   }
 
   /**

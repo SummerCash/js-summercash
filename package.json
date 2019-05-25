@@ -9,5 +9,8 @@
   "devDependencies": {
     "eslint": "^5.16.0",
     "eslint-config-google": "^0.13.0"
+  },
+  "dependencies": {
+    "libp2p": "^0.25.3"
   }
 }

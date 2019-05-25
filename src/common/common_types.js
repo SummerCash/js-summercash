@@ -6,7 +6,7 @@ class Address {
   /**
    * Creates an instance of Address.
    *
-   * @param {UInt8Array} address
+   * @param {Uint8Array} address
    */
   constructor(address) {
     this.address = address; // Set address
@@ -21,7 +21,7 @@ class Hash {
   /**
    * Creates an instance of Hash.
    *
-   * @param {UInt8Array} hash
+   * @param {Uint8Array} hash
    */
   constructor(hash) {
     this.hash = hash; // Set hash

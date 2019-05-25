@@ -13,7 +13,7 @@ class Transaction {
    * @param {Address} sender
    * @param {Address} recipient
    * @param {BigNumber} amount
-   * @param {UInt8Array} payload
+   * @param {Uint8Array} payload
    */
   constructor(nonce, parentHash, sender, recipient, amount, payload) {
     this.nonce = nonce; // Set nonce
@@ -27,9 +27,9 @@ class Transaction {
   }
 
   /**
-   * Serializes transaction to an Int8Array.
+   * Serializes transaction to a Uint8Array.
    *
-   * @return {UInt8Array} Serialized value.
+   * @return {Uint8Array} Serialized value.
    */
   bytes() {
     const encoder = new TextEncoder(); // Initialize text encoder

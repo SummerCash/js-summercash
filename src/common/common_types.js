@@ -1,3 +1,6 @@
+const util = require('./common_bytes'); // Byte helpers
+const zeroX = new TextEncoder().encode('0x'); // Encode 0x
+
 /**
  * @author: Dowland Aiello
  * @exports
@@ -24,7 +27,14 @@ class Hash {
    * @param {Uint8Array} hash
    */
   constructor(hash) {
-    this.hash = hash; // Set hash
+    let bodyHash = hash; // Set hash
+
+    if (!new TextDecoder('utf-8').decode(uint8array).includes('0x')) {
+      // Check no 0x
+      bodyHash = util.concatArrays(new TextEncoder('utf-8').encode('0x'), hash); // Set hash with 0x
+    }
+
+    this.hash = bodyHash; // Set hash
   }
 
   /**
@@ -33,11 +43,10 @@ class Hash {
    * @return {Hash} Constructed hash.
    */
   static fromString(s) {
-    const encoder = new TextEncoder(); // Initialize encoder
-
     const hashBody = Buffer.from(s.slice(2, s.length)); // Decode hash body
+    const hash = util.concatArrays(zeroX, hashBody); // Concatenate hash parts
 
-    return this(encoder.encode('0x') + hashBody); // Decode
+    return this(hash); // Decode
   }
 
   /**
@@ -50,4 +59,7 @@ class Hash {
   }
 }
 
-module.exports = [Address, Hash]; // Export address class
+module.exports = {
+  Address: Address,
+  Hash: Hash,
+}; // Export address class

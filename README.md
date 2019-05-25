@@ -1,2 +1,3 @@
 # js-summercash
-A minimal nodejs SummerCash client.
+
+A minimal nodejs SummerCash implementation.

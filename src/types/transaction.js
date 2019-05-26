@@ -46,7 +46,15 @@ class Transaction {
    * @param {BigNumber} privateKey
    */
   sign(privateKey) {
-    this.signature = ec.sign(this.hash.hash, privateKey); // Sign transaction, set signature
+    const key = ec.keyFromPrivate(privateKey); // Get keypair
+
+    this.signature = {signature: ec.sign(this.hash.hash, privateKey)}; // Sign transaction, set signature
+
+    this.signature.r = ec.getKeyRecoveryParam(
+      this.hash.hash,
+      this.signature.signature,
+      key.getPublic(),
+    ); // Set recovery
   }
 
   /**
@@ -55,9 +63,15 @@ class Transaction {
    * @return {Boolean} Signature validity.
    */
   verifySignature() {
-    const key = ec.keyFromPublic(this.sender.address.slice(2, 20)); // Get key
+    const key = ec.keyFromPublic(
+      ec.recoverPubKey(
+        this.hash.hash,
+        this.signature.signature,
+        this.signature.r,
+      ),
+    ); // Get key
 
-    return key.verify(this.hash.hash, this.signature); // Verify signature
+    return key.verify(this.hash.hash, this.signature.signature); // Verify signature
   }
 }
 

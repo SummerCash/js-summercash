@@ -29,8 +29,10 @@ class Account {
    */
   writeToMemory() {
     fs.writeFileSync(
-      resolve(`${commonIO.keystoreDir}/${this.address.toString()}`),
-      JSON.stringify(this),
+      resolve(
+        `${commonIO.keystoreDir}/account_${this.address.toString()}.json`,
+      ),
+      JSON.stringify(this, null, 2),
     ); // Write file
   }
 }

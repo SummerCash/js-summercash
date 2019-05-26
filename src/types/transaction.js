@@ -37,7 +37,7 @@ class Transaction {
    * @return {Uint8Array} Serialized value.
    */
   bytes() {
-    return new TextEncoder().encode(JSON.stringify(this)); // Return encoded value
+    return new TextEncoder().encode(JSON.stringify(this, null, 2)); // Return encoded value
   }
 
   /**

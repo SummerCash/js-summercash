@@ -19,6 +19,7 @@
   "dependencies": {
     "bignumber.js": "^8.1.1",
     "js-sha3": "^0.8.0",
-    "libp2p": "^0.25.3"
+    "libp2p": "^0.25.3",
+    "text-encoding": "^0.7.0"
   }
 }

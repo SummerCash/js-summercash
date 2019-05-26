@@ -1,5 +1,5 @@
 const util = require('./common_bytes'); // Byte helpers
-const zeroX = new TextEncoder().encode('0x'); // Encode 0x
+const {TextEncoder, TextDecoder} = require('text-encoding'); // Text encoder, decoder
 
 /**
  * @author: Dowland Aiello
@@ -16,7 +16,7 @@ class Address {
 
     if (!new TextDecoder('utf-8').decode(address).includes('0x')) {
       // Check no 0x
-      bodyAddress = util.concatArrays(zeroX, hash); // Set hash with 0x
+      bodyAddress = util.concatArrays(Hash.zeroX(), hash); // Set hash with 0x
     }
 
     this.address = bodyAddress; // Set address
@@ -38,7 +38,7 @@ class Hash {
 
     if (!new TextDecoder('utf-8').decode(hash).includes('0x')) {
       // Check no 0x
-      bodyHash = util.concatArrays(zeroX, hash); // Set hash with 0x
+      bodyHash = util.concatArrays(Hash.zeroX(), hash); // Set hash with 0x
     }
 
     this.hash = bodyHash; // Set hash
@@ -51,7 +51,7 @@ class Hash {
    */
   static fromString(s) {
     const hashBody = Buffer.from(s.slice(2, s.length)); // Decode hash body
-    const hash = util.concatArrays(zeroX, hashBody); // Concatenate hash parts
+    const hash = util.concatArrays(Hash.zeroX(), hashBody); // Concatenate hash parts
 
     return new this(hash); // Decode
   }
@@ -63,6 +63,15 @@ class Hash {
    */
   string() {
     return this.hash.toString('hex'); // Return hex value
+  }
+
+  /**
+   * Generates the standard 0x prefix as a byte array.
+   *
+   * @return {Uint8Array} Byte array value.
+   */
+  static zeroX() {
+    return new TextEncoder().encode('0x'); // Encode
   }
 }
 

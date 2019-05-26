@@ -1,5 +1,5 @@
 const sha3 = require('js-sha3').sha3_256; // Sha3
-
+const {TextEncoder} = require('text-encoding'); // Text encoder
 /**
  * @author: Dowland Aiello
  * @exports
@@ -32,9 +32,7 @@ class Transaction {
    * @return {Uint8Array} Serialized value.
    */
   bytes() {
-    const encoder = new TextEncoder(); // Initialize text encoder
-
-    return encoder.encode(JSON.stringify(this)); // Return encoded value
+    return new TextEncoder().encode(JSON.stringify(this)); // Return encoded value
   }
 }
 

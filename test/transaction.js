@@ -1,7 +1,7 @@
 const assert = require('assert'); // Tests
 const {Transaction} = require('../src/types/transaction'); // Tx class
 const {Address, Hash} = require('../src/common/common_types'); // Common types
-const BigNumber = require('bignumber.js'); // Big number
+const BigNumber = require('bn.js'); // Big number
 
 describe('Transaction', () => {
   describe('#bytes()', () => {
@@ -18,7 +18,6 @@ describe('Transaction', () => {
       );
 
       assert.equal(transaction.hash.hash.length, 34); // Ensure valid hash
-      console.log(transaction.hash.toString());
     });
   });
 });

@@ -48,6 +48,17 @@ class Transaction {
   sign(privateKey) {
     this.signature = ec.sign(this.hash.hash, privateKey); // Sign transaction, set signature
   }
+
+  /**
+   * Verify the contents of the transaction's signature.
+   *
+   * @return {Boolean} Signature validity.
+   */
+  verifySignature() {
+    const key = ec.keyFromPublic(this.sender.address.slice(2, 20)); // Get key
+
+    return key.verify(this.hash.hash, this.signature); // Verify signature
+  }
 }
 
 module.exports = {

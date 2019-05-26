@@ -18,4 +18,27 @@ describe('Account', () => {
       account.writeToMemory(); // Write account to persistent memory
     });
   });
+
+  describe('#readFromMemory()', () => {
+    it('should read an account from persistent memory', () => {
+      const account = new Account(); // Init new account
+
+      account.writeToMemory(); // Write account to persistent memory
+
+      const readAccount = Account.readFromMemory(account.address); // Read account
+
+      assert.strictEqual(
+        account.privateKey.toString(),
+        readAccount.privateKey.toString(),
+      ); // Ensure private keys equal
+      assert.strictEqual(
+        account.publicKey.encode('hex'),
+        readAccount.publicKey.encode('hex'),
+      ); // Ensure public keys equal
+      assert.strictEqual(
+        account.address.toString(),
+        readAccount.address.toString(),
+      ); // Ensure addresses equal
+    });
+  });
 });

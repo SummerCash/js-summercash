@@ -28,11 +28,15 @@ class Account {
    * Write account to persistent memory.
    */
   writeToMemory() {
+    let copy = Object.assign({}, this); // Copy self
+
+    copy.publicKey = {x: this.publicKey.getX(), y: this.publicKey.getY()}; // Set public key
+
     fs.writeFileSync(
       resolve(
         `${commonIO.keystoreDir}/account_${this.address.toString()}.json`,
       ),
-      JSON.stringify(this, null, 2),
+      JSON.stringify(copy, null, 2),
     ); // Write file
   }
 
@@ -41,7 +45,7 @@ class Account {
       resolve(`${commonIO.keystoreDir}/account_${address.toString()}.json`),
     ); // Read JSON file
 
-    return fromJSON(json); // Parse JSON
+    return Account.fromJSON(JSON.parse(json)); // Parse JSON
   }
 
   static fromJSON(json) {
@@ -49,9 +53,13 @@ class Account {
 
     let instance = new Account(); // Init new account
 
-    instance.privateKey = json.privateKey; // Set private key
-    instance.publicKey = json.publicKey; // Set public key
-    instance.address = json.address; // Set address
+    instance.privateKey = ec.keyFromPrivate(json.privateKey).getPrivate(); // Set private key
+    instance.publicKey = ec
+      .keyFromPublic({x: json.publicKey['x'], y: json.publicKey['y']}, 'hex')
+      .getPublic(); // Set public key
+    instance.address = new Address(
+      commonBytes.dictToBytes(json.address.address),
+    ); // Set address
 
     return instance; // Return instance
   }

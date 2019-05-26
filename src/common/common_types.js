@@ -61,8 +61,8 @@ class Hash {
    *
    * @return {String} String value.
    */
-  string() {
-    return this.hash.toString('hex'); // Return hex value
+  toString() {
+    return '0x' + Buffer.from(this.hash).toString('hex'); // Return hex value
   }
 
   /**

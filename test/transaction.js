@@ -17,7 +17,8 @@ describe('Transaction', () => {
         null,
       );
 
-      console.log(transaction);
+      assert.equal(transaction.hash.hash.length, 34); // Ensure valid hash
+      console.log(transaction.hash.toString());
     });
   });
 });

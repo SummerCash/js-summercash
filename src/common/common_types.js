@@ -16,7 +16,7 @@ class Address {
 
     if (!new TextDecoder('utf-8').decode(address).includes('0x')) {
       // Check no 0x
-      bodyAddress = util.concatArrays(Hash.zeroX(), hash); // Set hash with 0x
+      bodyAddress = util.concatArrays(Hash.zeroX(), address); // Set hash with 0x
     }
 
     this.address = bodyAddress; // Set address

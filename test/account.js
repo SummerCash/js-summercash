@@ -2,7 +2,7 @@ const assert = require('assert'); // Tests
 const {Account} = require('../src/accounts/account'); // Account
 
 describe('Account', () => {
-  describe('#constructor', () => {
+  describe('#constructor()', () => {
     it('should initialize a new account instance', () => {
       const account = new Account(); // Init new account
 

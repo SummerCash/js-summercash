@@ -34,4 +34,5 @@ function dictToBytes(dict) {
 
 module.exports = {
   concatArrays: concatArrays,
+  dictToBytes: dictToBytes,
 }; // Exports

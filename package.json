@@ -17,7 +17,7 @@
     "prettier": "^1.17.1"
   },
   "dependencies": {
-    "bignumber.js": "^8.1.1",
+    "bn": "^1.0.3",
     "elliptic": "^6.4.1",
     "js-sha3": "^0.8.0",
     "libp2p": "^0.25.3",

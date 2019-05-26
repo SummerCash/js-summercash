@@ -1,6 +1,8 @@
+const EC = require('elliptic').ec; // Elliptic curve lib
 const sha3 = require('js-sha3').sha3_256; // Sha3
 const {TextEncoder} = require('text-encoding'); // Text encoder, decoder
 const {Hash} = require('../common/common_types'); // Common types
+const ec = new EC('p521'); // Init elliptic curve lib
 
 /**
  * @author: Dowland Aiello
@@ -26,6 +28,7 @@ class Transaction {
     this.payload = payload; // Set payload
     this.timestamp = Date.UTC(); // Set timestamp
     this.hash = new Hash(new Uint8Array(sha3.arrayBuffer(this.bytes()))); // Set hash
+    this.contractCreation = false; // Set contract creation
   }
 
   /**
@@ -35,6 +38,15 @@ class Transaction {
    */
   bytes() {
     return new TextEncoder().encode(JSON.stringify(this)); // Return encoded value
+  }
+
+  /**
+   * Sign transaction with given private key.
+   *
+   * @param {BigNumber} privateKey
+   */
+  sign(privateKey) {
+    this.signature = ec.sign(this.hash.hash, privateKey); // Sign transaction, set signature
   }
 }
 

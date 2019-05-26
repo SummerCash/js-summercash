@@ -22,7 +22,7 @@ describe('Transaction', () => {
     });
 
     describe('#sign()', () => {
-      it('should sign a given transcation via ECDSA', () => {
+      it('should sign a given transaction via ECDSA', () => {
         const account = new Account(); // Initialize new account
 
         const transaction = new Transaction(

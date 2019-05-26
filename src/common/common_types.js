@@ -21,6 +21,15 @@ class Address {
 
     this.address = bodyAddress; // Set address
   }
+
+  /**
+   * Serializes address to string.
+   *
+   * @return {String} String value.
+   */
+  toString() {
+    return '0x' + Buffer.from(this.address.slice(2, 20)).toString('hex');
+  }
 }
 
 /**

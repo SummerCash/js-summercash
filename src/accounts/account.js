@@ -40,6 +40,12 @@ class Account {
     ); // Write file
   }
 
+  /**
+   * Read an account from persistent memory.
+   *
+   * @param {Address} address
+   * @return {Account} Read account.
+   */
   static readFromMemory(address) {
     const json = fs.readFileSync(
       resolve(`${commonIO.keystoreDir}/account_${address.toString()}.json`),
@@ -48,6 +54,12 @@ class Account {
     return Account.fromJSON(JSON.parse(json)); // Parse JSON
   }
 
+  /**
+   * Convert given JSON input to account.
+   *
+   * @param {String | Object} json
+   * @return {Account} Parsed account.
+   */
   static fromJSON(json) {
     if (typeof json == 'string') json = JSON.parse(json); // Parse if not already
 

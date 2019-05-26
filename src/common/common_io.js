@@ -4,7 +4,11 @@ const fs = require('fs'); // File system
 var dataDir = getDir('./data'); // Data dir
 var keystoreDir = getDir(`${dataDir}/keystore`); // Keystore dir
 
-// get working data dir.
+/**
+ * Get the working dir.
+ *
+ * @param {String} base
+ */
 function getDir(base) {
   if (!fs.existsSync(base)) {
     // Check not exist

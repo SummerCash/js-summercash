@@ -44,7 +44,7 @@ class Chain {
    */
   static readFromMemory(account) {
     const json = fs.readFileSync(
-      resolve(`${commonIO.keystoreDir}/account_${address.toString()}.json`),
+      resolve(`${commonIO.chainDir}/chain_${account.toString()}.json`),
     ); // Read JSON file
 
     return JSON.parse(json); // Return chain

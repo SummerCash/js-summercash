@@ -21,6 +21,7 @@
     "elliptic": "^6.4.1",
     "js-sha3": "^0.8.0",
     "libp2p": "^0.25.3",
+    "peer-info": "^0.15.1",
     "text-encoding": "^0.7.0"
   }
 }

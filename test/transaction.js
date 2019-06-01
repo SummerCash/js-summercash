@@ -85,15 +85,21 @@ describe('Transaction', () => {
         const parsed = Transaction.fromJSON(JSON.stringify(transaction)); // Parse tx
 
         assert.deepEqual(transaction.hash, parsed.hash); // Ensure equal hashes
-        assert.deepEqual(transaction.signature, parsed.signature); // Ensure equal signatures
-        assert.deepEqual(transaction.amount, parsed.amount); // Ensure equal amounts
+        assert.strictEqual(
+          JSON.stringify(transaction.amount),
+          JSON.stringify(parsed.amount),
+        ); // Ensure equal amounts
         assert.deepEqual(transaction.sender, parsed.sender); // Ensure equal senders
         assert.deepEqual(transaction.recipient, parsed.recipient); // Ensure equal recipients
         assert.deepEqual(transaction.nonce, parsed.nonce); // Ensure equal nonces
         assert.deepEqual(transaction.parentHash, parsed.parentHash); // Ensure equal hashes
-        assert.deepEqual(transaction.timestamp, parsed.timestamp); // Ensure equal timestamps
+        assert.strictEqual(
+          transaction.timestamp.toString(),
+          parsed.timestamp.toString(),
+        ); // Ensure equal timestamps
         assert.deepEqual(transaction.payload, parsed.payload); // Ensure equal payloads
         assert.deepEqual(transaction.contractCreation, parsed.contractCreation); // Ensure equal contract creation status
+        assert.ok(transaction.verifySignature()); // Validate signature
       });
     });
   });

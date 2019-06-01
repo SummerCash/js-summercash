@@ -1,8 +1,10 @@
 const EC = require('elliptic').ec; // Elliptic curve lib
 const sha3 = require('js-sha3').sha3_256; // Sha3
 const {TextEncoder} = require('text-encoding'); // Text encoder, decoder
-const {Hash} = require('../common/common_types'); // Common types
+const {Hash, Address} = require('../common/common_types'); // Common types
 const ec = new EC('p521'); // Init elliptic curve lib
+const CommonBytes = require('../common/common_bytes'); // Common bytes
+const BigNumber = require('bn.js'); // Big number
 
 /**
  * @author: Dowland Aiello
@@ -26,7 +28,7 @@ class Transaction {
     this.recipient = recipient; // Set recipient
     this.amount = amount; // Set amount
     this.payload = payload; // Set payload
-    this.timestamp = Date.UTC(); // Set timestamp
+    this.timestamp = new Date(new Date().getTime()); // Set timestamp
     this.hash = new Hash(new Uint8Array(sha3.arrayBuffer(this.bytes()))); // Set hash
     this.contractCreation = false; // Set contract creation
   }
@@ -72,6 +74,38 @@ class Transaction {
     ); // Get key
 
     return key.verify(this.hash.hash, this.signature.signature); // Verify signature
+  }
+
+  /**
+   * Convert given JSON input to transaction.
+   *
+   * @param {String | Object} json
+   * @return {Transaction} Parsed tx.
+   */
+  static fromJSON(json) {
+    if (typeof json == 'string') json = JSON.parse(json); // Parse if not already
+
+    const copy = Object.assign({}, json); // Copy JSON
+
+    let instance = copy; // Init instance
+
+    if (json.parentHash) {
+      // Check has parent hash
+      instance.parentHash = new Hash(
+        CommonBytes.dictToBytes(json.parentHash.hash),
+      ); // Parse
+    }
+
+    instance.hash = new Hash(CommonBytes.dictToBytes(json.hash.hash)); // Parse
+    instance.sender = new Address(CommonBytes.dictToBytes(json.sender.address)); // Parse
+    instance.recipient = new Address(
+      CommonBytes.dictToBytes(json.recipient.address),
+    ); // Parse
+    instance.signature = json.signature; // Set signature
+    instance.amount = new BigNumber(instance.amount); // Parse amount
+    instance.timestamp = new Date(json.timestamp); // Set timestamp
+
+    return instance; // Return parsed
   }
 }
 

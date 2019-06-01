@@ -1,6 +1,8 @@
 const assert = require('assert'); // Tests
 const {Account} = require('../src/accounts/account'); // Account
 const {Chain} = require('../src/types/chain'); // Chain
+const {Transaction} = require('../src/types/transaction'); // Transaction
+const BigNumber = require('bn.js'); // Big number
 
 describe('Chain', () => {
   describe('#constructor()', () => {
@@ -54,11 +56,32 @@ describe('Chain', () => {
         account.address.address.toString(),
       ); // Ensure equal addresses
 
+      const transaction = new Transaction(
+        0,
+        null,
+        account.address,
+        account.address,
+        new BigNumber(0),
+        null,
+      ); // Init transaction
+
+      transaction.sign(account.privateKey); // Sign transaction
+
+      assert.ok(
+        transaction.signature !== undefined && transaction.signature !== null,
+      ); // Ensure has been signed
+
+      chain.addTransaction(transaction); // Add transaction
+
       chain.writeToMemory(); // Write to memory
 
       const readChain = Chain.readFromMemory(account.address); // Read chain
 
       assert.strictEqual(JSON.stringify(chain), JSON.stringify(readChain)); // Ensure equal chains
+      assert.strictEqual(
+        chain.account.address.toString(),
+        readChain.account.address.toString(),
+      ); // Ensure equal addresses
     });
   });
 });

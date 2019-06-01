@@ -3,6 +3,8 @@ const fs = require('fs'); // File system
 
 var dataDir = getDir('./data'); // Data dir
 var keystoreDir = getDir(`${dataDir}/keystore`); // Keystore dir
+var dbDir = getDir(`${dataDir}/db`); // Db dir
+var chainDir = getDir(`${dbDir}/chain`); // Chain dir
 
 /**
  * Get the working dir.
@@ -21,4 +23,6 @@ function getDir(base) {
 module.exports = {
   dataDir: dataDir,
   keystoreDir: keystoreDir,
+  dbDir: dbDir,
+  chainDir: chainDir,
 }; // Set module exports

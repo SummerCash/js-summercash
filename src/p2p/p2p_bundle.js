@@ -12,7 +12,7 @@ class Bundle extends libp2p {
     const modules = {
       transport: [wstar],
       discovery: [wstar.discovery],
-      DHT: kadDHT,
+      DHT: KadDHT,
     }; // Set modules
 
     super(modules, peerInfo); // Call super

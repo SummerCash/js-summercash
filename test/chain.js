@@ -82,6 +82,10 @@ describe('Chain', () => {
         chain.account.address.toString(),
         readChain.account.address.toString(),
       ); // Ensure equal addresses
+      assert.strictEqual(
+        chain.transactions.length,
+        readChain.transactions.length,
+      ); // Ensure has read txs
     });
   });
 });

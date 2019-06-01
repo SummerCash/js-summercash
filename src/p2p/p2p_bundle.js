@@ -18,3 +18,7 @@ class Bundle extends libp2p {
     super(modules, peerInfo); // Call super
   }
 }
+
+module.exports = {
+  Bundle: Bundle, // Set bundle
+}; // Export

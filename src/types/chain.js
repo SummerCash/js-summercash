@@ -32,9 +32,7 @@ class Chain {
    */
   writeToMemory() {
     fs.writeFileSync(
-      resolve(
-        `${commonIO.chainDir}/chain_${this.account.address.toString()}.json`,
-      ),
+      resolve(`${commonIO.chainDir}/chain_${this.account.toString()}.json`),
       JSON.stringify(this, null, 2),
     ); // Write to memory
   }

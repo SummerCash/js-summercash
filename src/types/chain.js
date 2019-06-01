@@ -3,6 +3,7 @@ const {Transaction} = require('./transaction'); // Transaction
 const fs = require('fs'); // File system
 const resolve = require('path').resolve; // Path utils
 const commonIO = require('../common/common_io'); // Common I/O
+const commonBytes = require('../common/common_bytes'); // Common bytes
 
 /**
  * @author: Dowland Aiello
@@ -16,6 +17,7 @@ class Chain {
    */
   constructor(account) {
     this.account = account; // Set account
+    this.transactions = []; // Set txs
   }
 
   /**
@@ -47,7 +49,30 @@ class Chain {
       resolve(`${commonIO.chainDir}/chain_${account.toString()}.json`),
     ); // Read JSON file
 
-    return JSON.parse(json); // Return chain
+    return Chain.fromJSON(JSON.parse(json)); // Return chain
+  }
+
+  /**
+   * Convert given JSON input to chain.
+   *
+   * @param {String | Object} json
+   * @return {Chain} Parsed chain.
+   */
+  static fromJSON(json) {
+    if (typeof json == 'string') json = JSON.parse(json); // Parse if not already
+
+    let instance = new Chain(); // Init chain
+
+    instance.account = new Address(
+      commonBytes.dictToBytes(json.account.address),
+    ); // Parse account
+    instance.transactions = []; // Set transactions
+
+    json.transactions.forEach(element => {
+      instance.transactions.push(Transaction.fromJSON(element)); // Append parsed tx
+    });
+
+    return instance; // Return instance
   }
 }
 

@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "bn": "^1.0.3",
-    "elliptic": "^6.4.1",
+    "elliptic": "^6.5.3",
     "js-sha3": "^0.8.0",
     "libp2p": "^0.25.3",
     "libp2p-kad-dht": "^0.15.2",

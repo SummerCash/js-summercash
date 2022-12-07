@@ -20,7 +20,7 @@
     "bn": "^1.0.3",
     "elliptic": "^6.4.1",
     "js-sha3": "^0.8.0",
-    "libp2p": "^0.25.3",
+    "libp2p": "^0.38.0",
     "libp2p-kad-dht": "^0.15.2",
     "libp2p-websocket-star": "^0.10.2",
     "peer-info": "^0.15.1",
